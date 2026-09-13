@@ -13,6 +13,7 @@ export function textOptions(layer, size) {
     fontWeight: layer.fontWeight,
     fontStyle: layer.italic ? "italic" : "normal",
     fill: layer.color,
+    textBackgroundColor: layer.textBackground || "",
     opacity: layer.opacity,
     angle: layer.rotation,
     textAlign: layer.align,

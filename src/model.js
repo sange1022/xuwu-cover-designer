@@ -1,3 +1,5 @@
+import { xhsLayouts } from "./xhsTemplates.js";
+
 export const uid = () => crypto.randomUUID();
 export const SANS = "Noto Sans SC Variable";
 export const SERIF = "Noto Serif SC Variable";
@@ -54,6 +56,7 @@ export function newLayer(overrides = {}) {
     fontWeight: 500,
     italic: false,
     color: "#FFFFFF",
+    textBackground: "",
     opacity: 1,
     x: 0.1,
     y: 0.1,
@@ -180,6 +183,12 @@ export const presets = [
   ]),
 ];
 
+presets.push(
+  ...xhsLayouts.map(({ id, name, fontFamily = SANS, layers }) =>
+    preset(id, name, "小红书", fontFamily, layers),
+  ),
+);
+
 export const cloneLayers = (layers, scale = 1) =>
   layers.map((l) => ({
     ...l,
@@ -274,6 +283,9 @@ export function importTemplate(raw) {
       x: number(l.x, 0.1, -10, 10),
       y: number(l.y, 0.1, -10, 10),
       color: l.color,
+      textBackground: /^#[\da-f]{6}([\da-f]{2})?$/i.test(l.textBackground)
+        ? l.textBackground
+        : "",
       opacity: number(l.opacity, 1, 0, 1),
       italic: !!l.italic,
       rotation: number(l.rotation, 0, -360, 360),

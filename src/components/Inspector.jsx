@@ -349,6 +349,29 @@ export function Inspector({
               />
             </label>
             <label className="toggle-row">
+              <span>文字底色</span>
+              <input
+                type="checkbox"
+                role="switch"
+                aria-label="启用文字底色"
+                checked={!!layer.textBackground}
+                onChange={(e) =>
+                  patch({ textBackground: e.target.checked ? "#F5DF4D" : "" })
+                }
+              />
+            </label>
+            {!!layer.textBackground && (
+              <label className="effect-color">
+                底色颜色
+                <input
+                  type="color"
+                  aria-label="文字底色颜色"
+                  value={layer.textBackground.slice(0, 7)}
+                  onChange={(e) => patch({ textBackground: e.target.value })}
+                />
+              </label>
+            )}
+            <label className="toggle-row">
               <span>阴影</span>
               <input
                 type="checkbox"

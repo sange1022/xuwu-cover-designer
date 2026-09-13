@@ -61,7 +61,7 @@ export function Library({
   onRemovePhoto,
 }) {
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("全部");
+  const [category, setCategory] = useState("小红书");
   const templates = [...presets, ...doc.templates].filter(
     (t) =>
       t.name.includes(search) &&
@@ -176,16 +176,18 @@ export function Library({
           />
         </div>
         <div className="category-tabs" role="tablist" aria-label="模板分类">
-          {["全部", "建筑", "杂志", "简约", "醒目", "我的"].map((name) => (
-            <button
-              key={name}
-              role="tab"
-              aria-selected={category === name}
-              onClick={() => setCategory(name)}
-            >
-              {name}
-            </button>
-          ))}
+          {["小红书", "全部", "建筑", "杂志", "简约", "醒目", "我的"].map(
+            (name) => (
+              <button
+                key={name}
+                role="tab"
+                aria-selected={category === name}
+                onClick={() => setCategory(name)}
+              >
+                {name}
+              </button>
+            ),
+          )}
         </div>
         <div className="template-grid">
           {templates.map((t) => (

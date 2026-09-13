@@ -35,7 +35,9 @@ export default function App() {
   const photo =
     doc.photos.find((p) => p.id === doc.selectedPhotoId) || doc.photos[0];
   const [selectedId, setSelectedId] = useState(null);
-  const [selectedTemplate, setSelectedTemplate] = useState(presets[0]);
+  const [selectedTemplate, setSelectedTemplate] = useState(
+    presets.find((t) => t.category === "小红书"),
+  );
   const [fontOptions, setFontOptions] = useState(baseFonts);
   const [mobileTab, setMobileTab] = useState("canvas");
   const [dialog, setDialog] = useState(null);

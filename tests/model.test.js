@@ -79,8 +79,9 @@ test("invalid and oversized template documents fail explicitly", () => {
   );
 });
 
-test("six built-in layouts remain distinct with all original and basic colors", () => {
-  assert.equal(new Set(presets.map((p) => p.id)).size, 6);
+test("original and ten Xiaohongshu layouts remain distinct with all original colors", () => {
+  assert.equal(new Set(presets.map((p) => p.id)).size, 16);
+  assert.equal(presets.filter((p) => p.category === "小红书").length, 10);
   assert.equal(palette.length, 25);
   assert.deepEqual(palette[0], ["经典蓝", "#0F4C81"]);
   assert.deepEqual(palette.at(-1), ["纯白", "#FFFFFF"]);
@@ -91,6 +92,10 @@ test("six built-in layouts remain distinct with all original and basic colors", 
       version: 1,
     });
     assert.equal(imported.layers.length, template.layers.length);
+    assert.deepEqual(
+      imported.layers.map((l) => l.textBackground),
+      template.layers.map((l) => l.textBackground),
+    );
   }
 });
 
