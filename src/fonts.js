@@ -15,6 +15,8 @@ export async function restoreFonts() {
       });
       await face.load();
       document.fonts.add(face);
+      cache.clearFontCache(entry.family);
+      fontRequests.clear();
       restored.push({ family: entry.family, name: entry.name });
     } catch {
       /* An unavailable font must not prevent the workspace from opening. */
@@ -55,6 +57,8 @@ export async function ensureFont(layer) {
       { weight: "100 900" },
     ).load();
     document.fonts.add(font);
+    cache.clearFontCache(layer.fontFamily);
+    fontRequests.clear();
     loaded.add(layer.fontFamily);
   }
   const key = `${layer.fontWeight} 32px "${layer.fontFamily.replace(/["\\]/g, "")}"`;
